@@ -1,4 +1,4 @@
-# [React Starter Kit]
+# React Starter Kit
 
 React Boilerplate to create React Projects.
 * React [https://facebook.github.io/react/]
