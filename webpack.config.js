@@ -1,5 +1,5 @@
+var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -7,21 +7,22 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   filename: 'index.html',
   inject: 'body'
 });
-var BrowserSyncPluginConfig = new BrowserSyncPlugin({
-  host: 'localhost',
-  port: 3000,
-  server: { baseDir: ['./dist'] }
-});
 var ExtractTextPluginConfig = new ExtractTextPlugin('main.css', {
   allChunks: true
 });
 
 module.exports = {
+  debug: true,
+  devtool: 'source-map',
   entry:[
+    'react-hot-loader/patch',
+    'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client',
     './src/main.js'
   ],
   output:{
     path: __dirname + '/dist',
+    publicPath: '/',
     filename: 'bundle.js'
   },
   module:{
@@ -35,7 +36,9 @@ module.exports = {
       {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,loader: 'url-loader?limit=10000&mimetype=image/svg+xml'}
     ]
   },
-  plugins: [HtmlWebpackPluginConfig,
-            BrowserSyncPluginConfig,
+  plugins: [new webpack.optimize.OccurenceOrderPlugin(),
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NoErrorsPlugin(),
+            HtmlWebpackPluginConfig,
             ExtractTextPluginConfig]
 }

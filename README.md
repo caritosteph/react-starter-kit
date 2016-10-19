@@ -9,7 +9,7 @@ React Boilerplate to create React Projects.
 
 ## Installation
 ```
-git clone repository
+git clone https://github.com/caritosteph/react-starter-kit.git
 npm install
 npm start
 ```
