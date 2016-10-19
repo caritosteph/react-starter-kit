@@ -7,7 +7,7 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   filename: 'index.html',
   inject: 'body'
 });
-var ExtractTextPluginConfig = new ExtractTextPlugin('main.css', {
+var ExtractTextPluginConfig = new ExtractTextPlugin('bundle.css', {
   allChunks: true
 });
 
@@ -28,8 +28,7 @@ module.exports = {
   module:{
     loaders: [
       {test: /\.js$/,exclude: /node_modules/,loader: "babel-loader"},
-      {test: /\.scss$/,loader: ExtractTextPlugin.extract('css!sass')},
-      {test: /\.css$/,loader: 'style!css!'},
+      {test: /(\.scss|\.css)$/,loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass')},
       {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
       {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,loader: 'url-loader?limit=10000&mimetype=application/octet-stream'},
       {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,loader: 'file-loader'},
