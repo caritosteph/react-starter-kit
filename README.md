@@ -14,3 +14,5 @@ git clone https://github.com/caritosteph/react-starter-kit.git
 npm install
 npm start
 ```
+### npm scripts
+* `npm start` - runs the compiler and a server at the same time, both in "watch mode".
